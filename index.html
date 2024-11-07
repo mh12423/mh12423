@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSA Calculator</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.9.5/brython.min.js"></script>
+</head>
+<body onload="brython()">
+    <h1>RSA Calculator</h1>
+
+    <!-- Input form for RSA message -->
+    <form>
+        <label for="message">Message:</label>
+        <input type="text" id="message" name="message" required><br><br>
+        <button type="button" id="calculateBtn">Calculate</button>
+    </form>
+
+    <!-- Space to display the results -->
+    <div id="result"></div>
+
+    <script type="text/python">
+        import math
+        from sympy import randprime
+        import random
+        from browser import document
+
+        # Function to handle RSA calculation
+        def rsa_calculate(event):
+            message = document["message"].value
+            encrypt = Encrypt(message)
+            p, q, e, c = encrypt.encrypt()
+            
+            # Display results
+            document["result"].innerHTML = f"""
+                <p>Prime p: {p}</p>
+                <p>Prime q: {q}</p>
+                <p>Public exponent e: {e}</p>
+                <p>Encrypted message: {c}</p>
+            """
+
+        # Encrypt class that will handle RSA encryption
+        class Encrypt:
+            def __init__(self, message):
+                self.message = message
+                self.keys = self.generate()
+
+            def generate(self):
+                def sum_lengths(m):
+                    l = 0
+                    for i in range(m):
+                        l += 25*(26**i)
+                    return l
+
+                def generate_coprime(n):
+                    candidate = random.randint(2, n)
+                    while math.gcd(n, candidate) != 1:
+                        candidate = random.randint(2, n)
+                    return candidate
+
+                max_num = sum_lengths(len(self.message))
+                p = randprime(1, max_num)
+                q = randprime(1, max_num)
+                m = (p - 1) * (q - 1)
+                while p == q:
+                    q = randprime(1, max_num)
+                N = p * q
+                e = generate_coprime(m)
+                return [N, e, p, q]
+
+            def encrypt(self):
+                numbers = [(ord(char.lower()) - ord('a') + 1) for char in self.message]
+
+                def generate_number(numbers):
+                    m = 0
+                    for i in range(len(numbers)):
+                        m += numbers[i] * (26**i)
+                    return m
+
+                N = self.keys[0]
+                e = self.keys[1]
+                p = self.keys[2]
+                q = self.keys[3]
+                m = generate_number(numbers)
+                c = pow(m, e, N)
+                return p, q, e, c
+
+        # Set up button event listener
+        document["calculateBtn"].bind("click", rsa_calculate)
+    </script>
+</body>
+</html>
