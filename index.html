@@ -27,7 +27,7 @@
         # Function to handle RSA calculation
         def rsa_calculate(event):
             message = document["message"].value
-            encrypt = Encrypt("message")
+            encrypt = Encrypt(message)
             p, q, e, c = encrypt.encrypt()
             
             # Display results
@@ -101,7 +101,7 @@
                 return p, q, e, c
 
         # Set up button event listener
-        document["calculateBtn"].bind("click", rsa_calculate)
+        document["calculateBtn"].bind("click", rsa_calculate())
     </script>
 </body>
 </html>
