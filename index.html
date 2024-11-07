@@ -27,7 +27,7 @@
         # Function to handle RSA calculation
         def rsa_calculate(event):
             message = document["message"].value
-            encrypt = Encrypt(message)
+            encrypt = Encrypt("message")
             p, q, e, c = encrypt.encrypt()
             
             # Display results
