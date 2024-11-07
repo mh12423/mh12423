@@ -21,7 +21,6 @@
 
     <script type="text/python">
         import math
-        from sympy import randprime
         import random
         from browser import document
 
@@ -57,7 +56,23 @@
                     while math.gcd(n, candidate) != 1:
                         candidate = random.randint(2, n)
                     return candidate
+                def is_prime(n):
+                    if n <= 1:
+                        return False
+                    if n == 2:
+                        return True  # 2 is prime
+                    if n % 2 == 0:
+                        return False  # Even numbers greater than 2 are not prime
+                    for i in range(3, int(math.sqrt(n)) + 1, 2):
+                        if n % i == 0:
+                            return False
+                    return True
 
+                def randprime(lower, upper):
+                    while True:
+                        candidate = random.randint(lower, upper)
+                        if is_prime(candidate):
+                            return candidate
                 max_num = sum_lengths(len(self.message))
                 p = randprime(1, max_num)
                 q = randprime(1, max_num)
