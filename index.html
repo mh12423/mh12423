@@ -107,10 +107,13 @@
                     for i in range(m):
                         l += 25*(26**i)
                     return l
-
+                def gcd(a, b):
+                    while b:
+                        a, b = b, a % b
+                    return a
                 def generate_coprime(n):
                     candidate = random.randint(2, n)
-                    while math.gcd(n, candidate) != 1:
+                    while gcd(n, candidate) != 1:
                         candidate = random.randint(2, n)
                     return candidate
                 def is_prime(n):
