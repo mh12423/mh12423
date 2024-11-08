@@ -90,10 +90,10 @@
             p, q, e, c = encrypt.encrypt()
             
             # Display results
-            document["pOutput"].text = "Prime p: 61"  # Replace with your actual logic
-            document["qOutput"].text = "Prime q: 53"  # Replace with your actual logic
-            document["eOutput"].text = "Public exponent e: 17"  # Replace with your actual logic
-            document["cOutput"].text = "Encrypted message: 123456789"
+            document["pOutput"].text = <p>Prime p: {/p}<p>  # Replace with your actual logic
+            document["qOutput"].text = <p>Prime q: {/p}<p>  # Replace with your actual logic
+            document["eOutput"].text = <p>"Public exponent e: {e}</p>  # Replace with your actual logic
+            document["cOutput"].text = <p>"Encrypted message: {c}</p>
 
         # Encrypt class that will handle RSA encryption
         class Encrypt:
