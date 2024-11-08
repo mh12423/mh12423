@@ -27,11 +27,12 @@
         # Function to handle RSA calculation
         def rsa_calculate(event):
             message = document["message"].value
+            print(f"Message entered: {message}")
             encrypt = Encrypt(message)
             p, q, e, c = encrypt.encrypt()
             
             # Display results
-            document["result"].innerHTML = f"""
+            document["p0utput"].text = f"""
                 <p>Prime p: {p}</p>
                 <p>Prime q: {q}</p>
                 <p>Public exponent e: {e}</p>
