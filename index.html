@@ -161,7 +161,7 @@
                 p = self.keys[2]
                 q = self.keys[3]
                 m = generate_number(numbers)
-                c = pow(m, e, N)
+                c = int(pow(m, e, N))
                 return p, q, e, c
 
         # Set up button event listener
