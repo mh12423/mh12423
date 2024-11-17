@@ -125,10 +125,10 @@
                 def randint(lower, upper):
                     return int(window.Math.random() * (upper - lower + 1)) + lower
 
-                def generate_coprime(n):
-                    candidate = randint(2, n)
+                def generate_coprime(n, upper_limit):
+                    candidate = randint(2, upper_limit)
                     while gcd(n, candidate) != 1:
-                        candidate = randint(2, n)
+                        candidate = randint(2, upper_limit)
                     return candidate
 
                 def is_prime(n):
@@ -179,7 +179,7 @@
                 
                 # Calculate Euler's totient function
                 m_val = (p - 1) * (q - 1)
-                e = generate_coprime(m_val)
+                e = generate_coprime(m_val, lower_bound*10)
 
                 return [N, e, p, q, m]
 
