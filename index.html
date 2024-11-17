@@ -224,11 +224,10 @@
 
             def decrypt(self):
                 N = self.p * self.q
-                decoded_number = int(pow(self.encoded_message, self.keys, N))
-                print(f"Decoded number: {decoded_number}")
+                decoded_number = pow(self.encoded_message, self.keys, N)
 
                 letters_powers = []
-                next_step = decoded_number
+                next_step = int(decoded_number)
                 while next_step != 0:
                     remainder = int(next_step % 26)
                     next_step = int(window.Math.floor(next_step / 26))
