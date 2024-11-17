@@ -58,7 +58,7 @@
     </style>
 </head>
 <body onload="brython()">
-    <h1>RSA Calculator</h1>
+    <h1 class="section-title">RSA Decryption Calculator</h1>
     <div class="container">
         <form>
             <label for="message">Enter your message (String):</label>
@@ -167,10 +167,10 @@
                 lower_bound = window.Math.ceil(window.Math.sqrt(max_num))
 
                 # Generate primes p and q larger than the square root of the message number
-                p = randprime(lower_bound, max_num)
-                q = randprime(lower_bound, max_num)
+                p = randprime(lower_bound, lower_bound*10)
+                q = randprime(lower_bound, lower_bound*10)
                 while p == q:
-                    q = randprime(lower_bound, max_num)
+                    q = randprime(lower_bound, lower_bound*10)
 
                 N = p * q
                 # Ensure message is smaller than N
