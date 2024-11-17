@@ -240,7 +240,7 @@
                     letters = ''.join([chr(num + 96) for num in letters_powers])
                     return letters
                 letters = generate_letters(decoded_number)
-                return self.keys, decoded_number, letters
+                return self.keys, decoded_number, letters, pow(self.encoded_message, d, N)
 
         document["decryptionCalculateBtn"].bind("click", rsa_decrypt)
     </script>
