@@ -129,7 +129,7 @@
                 def generate_coprime(n, lower_limit):
                     candidate = lower_limit
                     while gcd(candidate, n) != 1:
-                        candidate += 1
+                        candidate += 2
                     return candidate
 
                 def is_prime(n):
@@ -180,7 +180,7 @@
                 
                 # Calculate Euler's totient function
                 m_val = (p - 1) * (q - 1)
-                e = generate_coprime(m_val, 11)
+                e = generate_coprime(m_val, 3)
 
                 return [N, e, p, q, m]
 
