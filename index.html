@@ -98,7 +98,8 @@
     </div>
 
     <script type="text/python">
-        from browser import document, window
+        from browser import document, window, console
+
 
         def rsa_calculate(event):
             message = document["message"].value
@@ -240,6 +241,9 @@
                     letters = ''.join([chr(num + 96) for num in letters_powers])
                     return letters
                 letters = generate_letters(decoded_number)
+                console.log("Value of d:", d)
+                console.log("Value of N:", N)
+                console.log("Decrypted number:", decoded_number)
                 return self.keys, decoded_number, letters, pow(self.encoded_message, d, N)
 
         document["decryptionCalculateBtn"].bind("click", rsa_decrypt)
