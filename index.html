@@ -237,7 +237,7 @@
                         next_step -= 1
                     letters_powers.append(remainder)
                 letters = ''.join([chr(num + 96) for num in letters_powers])
-                return letters
+                return decoded_number, letters
 
         document["decryptionCalculateBtn"].bind("click", rsa_decrypt)
     </script>
