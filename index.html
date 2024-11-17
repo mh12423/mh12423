@@ -78,16 +78,16 @@
         <h2 class="section-title">RSA Decryption Calculator</h2>
         <form id="decryptionForm">
             <label for="p">Enter Prime (p):</label>
-            <input type="number" id="p" class="rsaInput" placeholder="Prime (p)" required><br>
+            <input type="number" id="p" class="rsaInput" required><br>
 
             <label for="q">Enter Prime (q):</label>
-            <input type="number" id="q" class="rsaInput" placeholder="Prime (q)" required><br>
+            <input type="number" id="q" class="rsaInput" required><br>
 
             <label for="e">Enter Exponent (e):</label>
-            <input type="number" id="e" class="rsaInput" placeholder="Exponent (e)" required><br>
+            <input type="number" id="e" class="rsaInput" required><br>
             
-            <label for="ciphertext">Enter Encoded Message (c):</label>
-            <input type="number" id="ciphertext" class="rsaInput" placeholder="Encoded Message (c)" required><br>
+            <label for="ciphertext">Enter Encoded Message:</label>
+            <input type="number" id="ciphertext" class="rsaInput" required><br>
 
             <button type="button" id="decryptionCalculateBtn">Decrypt</button>
         </form>
@@ -237,7 +237,7 @@
                         next_step -= 1
                     letters_powers.append(remainder)
                 letters = ''.join([chr(num + 96) for num in letters_powers])
-                return decoded_number, letters
+                return self.keys, decoded_number, letters
 
         document["decryptionCalculateBtn"].bind("click", rsa_decrypt)
     </script>
