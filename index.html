@@ -219,7 +219,7 @@
                 self.keys = self.generate()
 
             def generate(self):
-                d = int(pow(self.e, -1, (self.p - 1) * (self.q - 1)))
+                d = int((pow(self.e, -1, (self.p - 1) * (self.q - 1)))%((self.p - 1) * (self.q - 1)))
                 print(f"d is: {d}")
                 return d
 
