@@ -1,4 +1,4 @@
-<html lang="en">
+c<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -89,7 +89,7 @@
             <input type="number" id="e" class="rsaInput" placeholder="Exponent (e)" required><br>
             
             <label for="ciphertext">Enter Encoded Message (c):</label>
-            <input type="number" id="ciphertext" class="rsaInput" placeholder="Ciphertext (c)" required><br>
+            <input type="number" id="ciphertext" class="rsaInput" placeholder="Encoded Message (c)" required><br>
 
             <button type="button" id="decryptionCalculateBtn">Decrypt</button>
         </form>
@@ -161,11 +161,11 @@
                             return candidate
 
                 max_num = sum_lengths(len(self.message))
-                p = randprime(1, window.Math.ceil(window.Math.sqrt(max_num)))
-                q = randprime(1, window.Math.ceil(window.Math.sqrt(max_num)))
+                p = randprime(window.Math.ceil(window.Math.sqrt(max_num)), max_num)
+                q = randprime(window.Math.ceil(window.Math.sqrt(max_num)), max_num)
                 m = (p - 1) * (q - 1)
                 while p == q:
-                    q = randprime(1, window.Math.ceil(window.Math.sqrt(max_num)))
+                    q = randprime(window.Math.ceil(window.Math.sqrt(max_num)), max_num)
                 N = p * q
                 e = generate_coprime(m)
                 return [N, e, p, q]
