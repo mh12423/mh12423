@@ -219,11 +219,13 @@
 
             def generate(self):
                 d = pow(self.e, -1, (self.p - 1) * (self.q - 1))
+                print(f"d is: {d}")
                 return d
 
             def decrypt(self):
                 N = self.p * self.q
                 decoded_number = pow(self.encoded_message, self.keys, N)
+                print(f"Decoded number: {decoded_number}")
 
                 letters_powers = []
                 next_step = decoded_number
