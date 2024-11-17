@@ -62,7 +62,7 @@
     <div class="container">
         <form>
             <label for="message">Enter your message (String):</label>
-            <!-- String input -->
+            <!-- String input for encryption -->
             <input type="text" id="message" name="message" required><br>
 
             <button type="button" id="calculateBtn">Calculate</button>
@@ -82,11 +82,11 @@
             <label for="p">Enter Prime (p):</label>
             <input type="number" id="p" class="rsaInput" placeholder="Prime (p)" required><br>
 
-            <label for="modulus">Enter Prime (q):</label>
+            <label for="q">Enter Prime (q):</label>
             <input type="number" id="q" class="rsaInput" placeholder="Prime (q)" required><br>
 
-            <label for="exponent">Enter Exponent (e):</label>
-            <input type="number" id="exponent" class="rsaInput" placeholder="Exponent (e)" required><br>
+            <label for="e">Enter Exponent (e):</label>
+            <input type="number" id="e" class="rsaInput" placeholder="Exponent (e)" required><br>
             
             <label for="ciphertext">Enter Encoded Message (c):</label>
             <input type="number" id="ciphertext" class="rsaInput" placeholder="Ciphertext (c)" required><br>
@@ -100,7 +100,7 @@
     </div>
 
     <script type="text/python">
-        from browser import document, window
+        from browser import document, window, html
 
         # Function to handle RSA calculation
         def rsa_calculate(event):
@@ -146,9 +146,9 @@
                     if n <= 1:
                         return False
                     if n == 2:
-                        return True  # 2 is prime
+                        return True
                     if n % 2 == 0:
-                        return False  # Even numbers greater than 2 are not prime
+                        return False
                     for i in range(3, int(window.Math.sqrt(n)) + 1, 2):
                         if n % i == 0:
                             return False
@@ -193,19 +193,19 @@
         document["calculateBtn"].bind("click", rsa_calculate)
 
         def rsa_decrypt(event):
-            p = document["p"].value
-            print(f"Prime p entered: {p}")
-            q = document["q"].value
-            print(f"Prime q entered: {q}")
-            e = document["e"].value
-            print(f"Exponent entered: {e}")
-            c = document["c"].value
-            print(f"Encoded message entered: {c}")
+            # Get the values entered for decryption
+            p = int(document["p"].value)
+            q = int(document["q"].value)
+            e = int(document["e"].value)
+            c = int(document["ciphertext"].value)
+
+            print(f"Prime p: {p}, Prime q: {q}, Exponent e: {e}, Ciphertext c: {c}")
+
             decrypt = Decrypt(p, q, e, c)
             decrypted_text = decrypt.decrypt()
             
-            # Display results
-            document["decryptionResult"].text = f"Decrypted Message: {decrypted_text}"
+            # Display decrypted message
+            document["dOutput"].text = f"Decrypted message: {decrypted_text}"
 
         class Decrypt:
             def __init__(self, p, q, e, encoded_message):
@@ -216,31 +216,29 @@
                 self.keys = self.generate()
         
             def generate(self):
-                d = pow(self.e, -1, int((self.p-1)*(self.q-1)))
+                d = pow(self.e, -1, (self.p - 1) * (self.q - 1))
                 return d
                 
             def decrypt(self):
-                N = self.p*self.q
+                N = self.p * self.q
                 decoded_number = pow(self.encoded_message, self.keys, N)
-                def generate_letters(c):
-                    letters_powers = []
-                    next_step = c
-                    while next_step != 0:
-                        remainder = int(next_step%26)
-                        next_step = int(math.floor(next_step/26))
-                        if remainder == 0:
-                            remainder = 26
-                            next_step -= 1
-                        letters_powers.append(remainder)
-                    letters = ''.join([chr(num + 96) for num in letters_powers])
-                    return letters
-                letters = generate_letters(decoded_number)
-                print('d is', self.keys)
-                print('The decoded number is', decoded_number)
-                print('The decoded message is', letters)
+                
+                # Convert decoded number to text
+                letters_powers = []
+                next_step = decoded_number
+                while next_step != 0:
+                    remainder = int(next_step % 26)
+                    next_step = int(window.Math.floor(next_step / 26))
+                    if remainder == 0:
+                        remainder = 26
+                        next_step -= 1
+                    letters_powers.append(remainder)
+                letters = ''.join([chr(num + 96) for num in letters_powers])
                 return letters
         
+        # Set up decryption button event listener
         document["decryptionCalculateBtn"].bind("click", rsa_decrypt)
     </script>
 </body>
 </html>
+
