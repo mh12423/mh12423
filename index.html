@@ -138,22 +138,24 @@
                             return candidate
 
                 max_num = sum_lengths(len(self.message))
-                p = randprime(1, max_num)
-                q = randprime(1, max_num)
+                p = randprime(1, window.Math.ceil(window.Math.sqrt(max_num)))
+                q = randprime(1, window.Math.ceil(window.Math.sqrt(max_num)))
                 m = (p - 1) * (q - 1)
                 while p == q:
-                    q = randprime(1, max_num)
+                    q = randprime(1, window.Math.ceil(window.Math.sqrt(max_num)))
                 N = p * q
                 e = generate_coprime(m)
                 return [N, e, p, q]
 
             def encrypt(self):
                 numbers = [(ord(char.lower()) - ord('a') + 1) for char in self.message]
+                print(f"Message to numbers: {numbers}")
 
                 def generate_number(numbers):
                     m = 0
                     for i in range(len(numbers)):
                         m += numbers[i] * (26 ** i)
+                    print(f"Generated m (message as number): {m}")
                     return m
 
                 N = self.keys[0]
