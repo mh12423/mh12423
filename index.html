@@ -179,7 +179,7 @@
                 
                 # Calculate Euler's totient function
                 m_val = (p - 1) * (q - 1)
-                e = generate_coprime(m_val, lower_bound*10)
+                e = generate_coprime(m_val, upper_limit = lower_bound*10)
 
                 return [N, e, p, q, m]
 
